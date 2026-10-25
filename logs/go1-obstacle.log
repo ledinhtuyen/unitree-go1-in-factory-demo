@@ -1,0 +1,144 @@
+Patched locomotion_params.brax_ppo_config for Go1JoystickObstacle
+Registered Go1JoystickObstacle -> /home/ubuntu/factory/factory_obstacle.xml
+/home/ubuntu/mjx-env/lib/python3.12/site-packages/glfw/__init__.py:917: GLFWError: (65550) b'X11: The DISPLAY environment variable is missing'
+  warnings.warn(message, GLFWError)
+/home/ubuntu/mjx-env/lib/python3.12/site-packages/glfw/__init__.py:917: GLFWError: (65537) b'The GLFW library is not initialized'
+  warnings.warn(message, GLFWError)
+Environment Config:
+Kd: 0.5
+Kp: 35.0
+action_repeat: 1
+action_scale: 0.5
+command_config:
+  a:
+  - 1.5
+  - 0.8
+  - 1.2
+  b:
+  - 0.9
+  - 0.25
+  - 0.5
+ctrl_dt: 0.02
+episode_length: 1000
+history_len: 1
+impl: jax
+naconmax: 65536
+njmax: 80
+noise_config:
+  level: 1.0
+  scales:
+    gravity: 0.05
+    gyro: 0.2
+    joint_pos: 0.03
+    joint_vel: 1.5
+    linvel: 0.1
+pert_config:
+  enable: false
+  kick_durations:
+  - 0.05
+  - 0.2
+  kick_wait_times:
+  - 1.0
+  - 3.0
+  velocity_kick:
+  - 0.0
+  - 3.0
+reward_config:
+  max_foot_height: 0.1
+  scales:
+    action_rate: -0.01
+    ang_vel_xy: -0.05
+    dof_pos_limits: -1.0
+    energy: -0.001
+    feet_air_time: 0.1
+    feet_clearance: -2.0
+    feet_height: -0.2
+    feet_slip: -0.1
+    lin_vel_z: -0.5
+    orientation: -5.0
+    pose: 0.5
+    stand_still: -1.0
+    termination: -1.0
+    torques: -0.0002
+    tracking_ang_vel: 0.5
+    tracking_lin_vel: 1.0
+  tracking_sigma: 0.25
+sim_dt: 0.004
+soft_joint_pos_limit_factor: 0.95
+
+Environment Config Overrides:
+{'impl': 'jax'}
+
+PPO Training Parameters:
+action_repeat: 1
+batch_size: 256
+discounting: 0.97
+entropy_cost: 0.01
+episode_length: 1000
+learning_rate: 0.0003
+max_grad_norm: 1.0
+network_factory:
+  policy_hidden_layer_sizes: !!python/tuple
+  - 512
+  - 256
+  - 128
+  policy_obs_key: state
+  value_hidden_layer_sizes: !!python/tuple
+  - 512
+  - 256
+  - 128
+  value_obs_key: privileged_state
+normalize_observations: true
+num_envs: 1024
+num_evals: 10
+num_minibatches: 32
+num_resets_per_eval: 10
+num_timesteps: 50000000
+num_updates_per_batch: 4
+reward_scaling: 1.0
+unroll_length: 20
+
+Experiment name: Go1JoystickObstacle-20261025-014038
+Logs are being stored in: /home/ubuntu/go1-obstacle/Go1JoystickObstacle-20261025-014038
+Restoring from: /home/ubuntu/go1-50m/Go1JoystickFlatTerrain-20261025-005702/checkpoints/000058982400
+Checkpoint path: /home/ubuntu/go1-obstacle/Go1JoystickObstacle-20261025-014038/checkpoints
+0: reward=7.752
+6553600: reward=8.101
+13107200: reward=12.394
+19660800: reward=14.585
+26214400: reward=16.219
+32768000: reward=19.249
+39321600: reward=18.173
+45875200: reward=18.031
+52428800: reward=17.858
+58982400: reward=19.216
+Done training.
+Time to JIT compile: 168.80664957099998
+Time to train: 1359.9010578879997
+Starting inference...
+FPS for rendering: 25.0
+Traceback (most recent call last):
+  File "/home/ubuntu/factory/train_obstacle.py", line 96, in <module>
+    main()
+  File "/home/ubuntu/factory/train_obstacle.py", line 92, in main
+    train_jax_ppo.run()
+  File "/home/ubuntu/mujoco_playground/learning/train_jax_ppo.py", line 565, in run
+    app.run(main)
+  File "/home/ubuntu/mjx-env/lib/python3.12/site-packages/absl/app.py", line 410, in run
+    _run_main(main, args)
+  File "/home/ubuntu/mjx-env/lib/python3.12/site-packages/absl/app.py", line 355, in _run_main
+    sys.exit(main(argv))
+             ^^^^^^^^^^
+  File "/home/ubuntu/mujoco_playground/learning/train_jax_ppo.py", line 556, in main
+    frames = infer_env.render(
+             ^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/mujoco_playground/mujoco_playground/_src/mjx_env.py", line 332, in render
+    return render_array(
+           ^^^^^^^^^^^^^
+  File "/home/ubuntu/mujoco_playground/mujoco_playground/_src/mjx_env.py", line 360, in render_array
+    renderer = mujoco.Renderer(mj_model, height=height, width=width)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/mjx-env/lib/python3.12/site-packages/mujoco/rendering/classic/renderer.py", line 92, in __init__
+    self._mjr_context = mujoco.MjrContext(model, font_scale.value)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mujoco.FatalError: an OpenGL platform library has not been loaded into this process, this most likely means that a valid OpenGL context has not been created before mjr_makeContext was called

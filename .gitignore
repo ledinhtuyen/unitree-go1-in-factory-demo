@@ -1,0 +1,28 @@
+# Checkpoints and training outputs (retrain to reproduce; see README)
+checkpoints/
+go1-*/
+**/checkpoints/
+*.ckpt
+
+# Logs
+*.log
+
+# Trajectories (intermediate, regenerate with nav_obstacle.py)
+*.npz
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Large binaries: the single included demo video is excepted
+*.mp4
+!factory_obstacle_demo.mp4
+*.bin
+*.onnx
+
+# Kept training logs (see logs/)
+!logs/
+!logs/*.log
