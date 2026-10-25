@@ -1,0 +1,82 @@
+{
+  "mode": "sequential_autonomous_no_waypoint_no_reset",
+  "ckpt": "/home/ubuntu/go1-nav-seq/Go1NavSeq-20261025-032046/checkpoints/000058982400",
+  "start": [
+    -4.5,
+    -2.5
+  ],
+  "total_step_limit": 2500,
+  "total_steps": 372,
+  "total_path_m": 12.323027895954963,
+  "total_doors_crossed": 2,
+  "pumps_reached": 3,
+  "pumps_total": 3,
+  "success": true,
+  "fell": false,
+  "failed_segment": null,
+  "segment_boundaries": [
+    217,
+    318,
+    371
+  ],
+  "segments": [
+    {
+      "pump": "pump1",
+      "target": [
+        -3.0,
+        2.6
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 218,
+      "doors_crossed": 2,
+      "final_xy": [
+        -2.9807991981506348,
+        2.2824056148529053
+      ],
+      "final_dist": 0.31817426713771146,
+      "path_length_m": 6.153767822541243,
+      "true_value": 2.5,
+      "read_value": 2.5003
+    },
+    {
+      "pump": "pump2",
+      "target": [
+        0.0,
+        2.6
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 101,
+      "doors_crossed": 0,
+      "final_xy": [
+        -0.33596986532211304,
+        2.6663663387298584
+      ],
+      "final_dist": 0.34246202902068584,
+      "path_length_m": 3.107741713283901,
+      "true_value": 5.8,
+      "read_value": 5.801
+    },
+    {
+      "pump": "pump3",
+      "target": [
+        3.0,
+        2.6
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 53,
+      "doors_crossed": 0,
+      "final_xy": [
+        2.6676526069641113,
+        2.496094226837158
+      ],
+      "final_dist": 0.34821142909778163,
+      "path_length_m": 2.954949252925365,
+      "true_value": 8.1,
+      "read_value": 8.1005
+    }
+  ],
+  "gauge_note": "Gauge values are the verified obstacle-scene readings (gauge_obstacle_results.json), reused as in eval_nav_auto.py; no new camera gauge run is claimed in this script."
+}

@@ -316,7 +316,119 @@ from that checkpoint's `ppo_network_config.json` and from
   unroll_length 20, num_minibatches 32, num_updates_per_batch 4,
   batch_size 256, max_grad_norm 1.0, reward_scaling 1.0,
   num_evals 10, num_eval_envs 128.
-- Other checkpoints are NOT included (see Excluded files): only this
-  final navigation checkpoint is excepted from the checkpoint exclusion
-  in `.gitignore`. Retrain with `scripts/train_nav.py` to reproduce
-  the obstacle/flat checkpoints, which are deliberately excluded.
+- Other checkpoints are NOT included (see Excluded files): only the v1
+  final navigation checkpoint above and the v2 sequential checkpoint
+  (`checkpoints/go1-nav-seq/000058982400/`) are excepted from the
+  checkpoint exclusion in `.gitignore`. Retrain with `scripts/train_nav.py`
+  to reproduce the obstacle/flat checkpoints, which are deliberately excluded.
+
+## Sequential test (one continuous run, no reset between pumps)
+
+How it differs from the per-pump reset test: `scripts/eval_nav_auto.py`
+resets the robot to the south-zone start (-4.5, -2.5) before EACH pump.
+`scripts/eval_nav_seq.py` resets ONCE with target pump1, then, on reaching
+a pump (within 0.35 m), switches the target in `state.info`
+(`target_idx`, `target_xy`, `prev_dist`, `prev_zone` to the current zone,
+`doors_crossed` reset to 0 for the new segment, `reached` reset to 0,
+`command` zero), recomputes the observation with `env._get_obs`, clears
+`state.done`, and continues WITHOUT resetting qpos/qvel/ctrl, in the
+order pump1 -> pump2 -> pump3. Total step limit 2500. Doors crossed in
+`state.info` are reset per segment, so per-segment counts are clean;
+the total is the sum of the segment counts. After pump1, pump2/pump3 stop
+points are all in the north zone (y=2.6), so later segments should need
+no extra door crossings -- only the first segment crosses 2 doors
+(south->middle, middle->north).
+
+Result, final nav checkpoint, verified from `results/nav_summary_seq.json`
+(this run did NOT succeed end-to-end -- do not claim otherwise):
+- Segment 1, pump1: REACHED, 250 steps, 2 doors crossed, final distance
+  0.303 m, path 6.11 m, gauge 2.5 -> 2.5003 bar (verified obstacle-scene
+  reading, reused as in the per-pump test).
+- Segment 2, pump2: FAILED -- the robot FELL after 39 steps, ending at
+  (-2.987, 3.057), 3.022 m from the pump2 stop point, 0 doors crossed,
+  path 0.78 m. Pump3 was never attempted.
+- Total: 289 steps, path 6.94 m, doors crossed 2, pumps reached 1/3,
+  fell=True, failed segment pump2.
+
+Why it failed (diagnosis from `nav_trajectory_seq.npz`, not a script
+error): segment 1 is byte-identical in outcome to the per-pump pump1 run
+(250 steps, same final position), so the target switch itself worked --
+after the switch the robot kept moving (it did not end immediately as
+"reached", because the pump2 distance was 3.02 m). From the pump1 stop
+point it kept walking north instead of turning east toward pump2, its
+up-vector fell from 1.00 to below 0 at the end, and it toppled near the
+pump1 structure (y ~ 3.06, pump at y=3.2). Training never started an
+episode in the north zone (80% south, 20% middle starts) and episodes
+always terminated on reach, so "continue in the north zone with a new
+target after a reach" is out-of-distribution for this policy. Fixing it
+properly means retraining with north-zone starts and/or multi-target
+episodes that do not terminate on the first reach -- that retraining was
+not done for this test.
+
+Video: `factory_nav_seq_demo.mp4` -- the actual sequential trajectory
+(640x480, 25 fps, 4.9 s, 123 frames, 1.3 MB), with per-segment labels;
+the pump1 gauge close-up is inserted at the segment-1 boundary only,
+because pump2's gauge was not read in this run (its segment failed).
+Script: `scripts/eval_nav_seq.py`, render: `scripts/render_nav_seq.py`,
+trajectory: `nav_trajectory_seq.npz` (kept on the training instance;
+segment boundaries are stored in the npz as `segment_boundaries`).
+
+## Sequential test v2 (retrain for multi-target continuation)
+
+Why v2 exists: the v1 sequential test (see "Sequential test" above) reached
+pump1 in 250 steps, then fell after 39 steps on the pump2 segment, walking
+north instead of east, and never attempted pump3 (total 289 steps, 1/3).
+Diagnosis: v1 training never started in the north zone (80% south / 20%
+middle) and episodes terminated on the first reach, so continuing in the
+north zone with a new target was out-of-distribution.
+
+Env changes (`scripts/nav_env_v2.py`, class `Go1NavSeq`; v1 is kept as
+`scripts/nav_env.py` and backed up on the instance as `nav_env_v1.py`):
+- Start distribution: 1/3 south (y -3.2..-1.6), 1/3 middle (y -0.4..1.0),
+  1/3 north (y 1.9..2.4, x -4.5..4.5, pushed out of north crates).
+- Episodes do NOT terminate on reach: done is fall only. On a reach step
+  (dist < 0.35 m, not fall) the +100 reach bonus is given for that step,
+  then the env samples a new target pump different from the current one
+  (JAX-traceable `jp.where`, not a Python if), updates target_idx /
+  target_xy / prev_dist in info, increments targets_reached, and recomputes
+  obs with the new target. The episode continues to the 1000-step
+  truncation or a fall.
+- Observation (70/145), network ([512, 256, 128]), and reward scales are
+  UNCHANGED from v1, so the v1 nav checkpoint restores verbatim.
+
+Retraining (`scripts/train_nav_seq.py`, log `logs/go1-nav-seq.log`):
+- Restored directly from `go1-nav/Go1Nav-20261025-023911/checkpoints/000058982400`
+  (no weight surgery needed; the surgery fallback from `train_nav.py` is kept
+  in the script but was not used). 50,000,000 steps, num_envs 1024, seed 1,
+  logdir `go1-nav-seq`, experiment `Go1NavSeq-20261025-032046`.
+- Eval reward (v2 episodes accumulate multiple reach bonuses over 1000
+  steps, so these numbers are NOT comparable to v1's 11.311):
+  29.698 (step 0, restored policy) -> 45.185 -> 44.454 -> 47.361 -> 47.537 ->
+  50.104 -> 49.970 -> 48.125 -> 46.752 -> 46.839 at final step 58,982,400
+  (JIT 68.6 s, train ~488 s). Final checkpoint
+  `go1-nav-seq/Go1NavSeq-20261025-032046/checkpoints/000058982400`
+  (`commit_success.txt` present). Checkpoint included here:
+  `checkpoints/go1-nav-seq/000058982400/` (1.7 MB, 14 files,
+  `commit_success.txt` present). Architecture is identical to v1 (see Model
+  architecture): policy/value MLPs [512, 256, 128], silu, tanh_normal,
+  state 70 / privileged_state 145, action 12, normalize_observations true,
+  verified from this checkpoint's `ppo_network_config.json`.
+
+Sequential re-test, eval script UNCHANGED except the checkpoint path
+(`scripts/eval_nav_seq.py` still imports the v1 env, whose manual target
+switch on reach is exactly the continuation v2 trains for):
+`results/nav_summary_seq_v2.json`, log `logs/eval_seq_v2.log`,
+video `factory_nav_seq_demo_v2.mp4` (640x480, 25 fps, 243 frames, 9.72 s,
+2,011,257 bytes; the v1 video `factory_nav_seq_demo.mp4` is kept unchanged):
+- pump1: REACHED, 218 steps, 2 doors, final distance 0.318 m, path 6.15 m,
+  gauge 2.5 -> 2.5003 bar
+- pump2: REACHED, 101 steps, 0 doors, final distance 0.342 m, path 3.11 m,
+  gauge 5.8 -> 5.8010 bar (this segment fell in v1 after 39 steps)
+- pump3: REACHED, 53 steps, 0 doors, final distance 0.348 m, path 2.95 m,
+  gauge 8.1 -> 8.1005 bar
+- Total: 3/3 pumps, 372 steps, path 12.32 m, doors 2, 0 falls, success true.
+  Direct comparison to v1: pump1 250 -> 218 steps, pump2 fell at 39 steps
+  -> reached in 101 steps, pump3 never attempted -> reached in 53 steps,
+  total 289 steps / 1/3 -> 372 steps / 3/3.
+Gauge values are the verified obstacle-scene readings reused as in the v1
+sequential test; no new camera gauge run is claimed in the sequential script.

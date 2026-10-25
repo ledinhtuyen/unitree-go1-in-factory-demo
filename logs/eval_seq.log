@@ -1,0 +1,114 @@
+Warp 1.18.0 initialized:
+   CUDA Toolkit 13.4, Driver 13.0
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L4" (22 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/ubuntu/.cache/warp/1.18.0
+SEQUENTIAL AUTONOMOUS: one continuous run, NO reset between pumps
+Module mujoco.mjx.warp.ffi 4443472 load on device 'cuda:0' took 0.51 ms  (cached)
+Module mujoco.mjx.third_party.mujoco_warp._src.smooth 9b1e724 load on device 'cuda:0' took 6.46 ms  (cached)
+Module _nxn_broadphase__locals__kernel_a903ee65 a903ee6 load on device 'cuda:0' took 0.51 ms  (cached)
+Module _nxn_broadphase__locals__kernel_a903ee65 2c6a5c7 load on device 'cuda:0' took 0.48 ms  (cached)
+Module _primitive_narrowphase__locals__primitive_narrowphase_f84c77c7 f84c77c load on device 'cuda:0' took 0.60 ms  (cached)
+Module mujoco.mjx.third_party.mujoco_warp._src.constraint 8d4d513 load on device 'cuda:0' took 0.47 ms  (cached)
+Module _friction_dof__locals__kernel_febe3015 febe301 load on device 'cuda:0' took 0.53 ms  (cached)
+Module _limit_slide_hinge__locals__kernel_b1bbc842 b1bbc84 load on device 'cuda:0' took 0.60 ms  (cached)
+Module _efc_contact_init__locals__kernel_3a7c064e 3a7c064 load on device 'cuda:0' took 0.46 ms  (cached)
+Module _efc_contact_jac_dense__locals__kernel_b0c1fdf8 5fcbd59 load on device 'cuda:0' took 0.50 ms  (cached)
+Module _efc_contact_update__locals__kernel_efb3ac6e efb3ac6 load on device 'cuda:0' took 0.40 ms  (cached)
+Module mujoco.mjx.third_party.mujoco_warp._src.sensor 8feaecd load on device 'cuda:0' took 1.25 ms  (cached)
+Module _contact_match_builder__locals___contact_match_4da0430b 4da0430 load on device 'cuda:0' took 0.49 ms  (cached)
+Module _contact_sort__locals__contact_sort_bed1da43 6afef3a load on device 'cuda:0' took 0.50 ms  (cached)
+Module mujoco.mjx.third_party.mujoco_warp._src.forward 8f2ef84 load on device 'cuda:0' took 1.36 ms  (cached)
+Module mujoco.mjx.third_party.mujoco_warp._src.passive 0a5f855 load on device 'cuda:0' took 1.57 ms  (cached)
+Module _qfrc_passive_kernel__locals__kernel_976399dd 976399d load on device 'cuda:0' took 0.41 ms  (cached)
+Module _qfrc_smooth__locals__kernel_8b823980 8b82398 load on device 'cuda:0' took 0.37 ms  (cached)
+Module mujoco.mjx.third_party.mujoco_warp._src.support 970ef9a load on device 'cuda:0' took 0.55 ms  (cached)
+Module _tile_cholesky_factorize_solve_block__locals__kernel_3c544b6e 564f1e2 load on device 'cuda:0' took 45.12 ms  (cached)
+Module _solve_init_dof__locals__kernel_60896b56 60896b5 load on device 'cuda:0' took 0.42 ms  (cached)
+Module mujoco.mjx.third_party.mujoco_warp._src.solver 51bb199 load on device 'cuda:0' took 0.61 ms  (cached)
+Module _solve_init_jaref_kernel__locals__kernel_f7cae18b f7cae18 load on device 'cuda:0' took 0.42 ms  (cached)
+Module mul_m_kernel__locals___mul_m_f3de1cc7 f3de1cc load on device 'cuda:0' took 0.43 ms  (cached)
+Module _update_constraint_efc__locals__kernel_0539aa50 0539aa5 load on device 'cuda:0' took 0.44 ms  (cached)
+Module _update_constraint_init_qfrc_constraint_dense__locals__kernel_bd7ca2ec bd7ca2e load on device 'cuda:0' took 0.42 ms  (cached)
+Module _update_gradient_zero_grad_dot__locals__kernel_b20934d7 b20934d load on device 'cuda:0' took 0.42 ms  (cached)
+Module _update_gradient_grad__locals__kernel_c876081d c876081 load on device 'cuda:0' took 0.40 ms  (cached)
+Module _update_gradient_JTDAJ_dense_tiled__locals__kernel_462587fc 5be2110 load on device 'cuda:0' took 1.02 ms  (cached)
+Module _update_gradient_cholesky__locals__kernel_5d37b712 3092a2d load on device 'cuda:0' took 48.42 ms  (cached)
+Module _linesearch_iterative_kernel__locals__kernel_d6065972 96de87a load on device 'cuda:0' took 0.78 ms  (cached)
+Module _update_constraint_efc__locals__kernel_e953547e e953547 load on device 'cuda:0' took 0.55 ms  (cached)
+Module _update_constraint_init_qfrc_constraint_dense__locals__kernel_d92a3413 d92a341 load on device 'cuda:0' took 0.47 ms  (cached)
+Module _update_gradient_zero_grad_dot__locals__kernel_e9f8c963 e9f8c96 load on device 'cuda:0' took 0.41 ms  (cached)
+Module _update_gradient_grad__locals__kernel_87959044 8795904 load on device 'cuda:0' took 0.42 ms  (cached)
+Module _update_gradient_cholesky__locals__kernel_5bef8016 d05526c load on device 'cuda:0' took 47.58 ms  (cached)
+Module _solve_done__locals__kernel_97304d50 97304d5 load on device 'cuda:0' took 0.50 ms  (cached)
+--- segment 1/3: pump1 target=(-3.0, 2.6) starting at (-4.50, -2.50) ---
+Module _next_time_builder__locals___next_time_bc454e15 bc454e1 load on device 'cuda:0' took 0.63 ms  (cached)
+  total 200 pump1 xy=(-2.57,0.24) dist=2.40 zone=1
+pump1: reached=True fell=False steps=250 doors_crossed=2 final=(-2.946,2.302) dist=0.303 path=6.11m
+--- segment 2/3: pump2 target=(0.0, 2.6) starting at (-2.95, 2.30) ---
+pump2: reached=False fell=True steps=39 doors_crossed=0 final=(-2.987,3.057) dist=3.022 path=0.78m
+{
+  "mode": "sequential_autonomous_no_waypoint_no_reset",
+  "ckpt": "/home/ubuntu/go1-nav/Go1Nav-20261025-023911/checkpoints/000058982400",
+  "start": [
+    -4.5,
+    -2.5
+  ],
+  "total_step_limit": 2500,
+  "total_steps": 289,
+  "total_path_m": 6.942434674239058,
+  "total_doors_crossed": 2,
+  "pumps_reached": 1,
+  "pumps_total": 3,
+  "success": false,
+  "fell": true,
+  "failed_segment": "pump2",
+  "segment_boundaries": [
+    249,
+    288
+  ],
+  "segments": [
+    {
+      "pump": "pump1",
+      "target": [
+        -3.0,
+        2.6
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 250,
+      "doors_crossed": 2,
+      "final_xy": [
+        -2.946193218231201,
+        2.3015270233154297
+      ],
+      "final_dist": 0.3032841696746852,
+      "path_length_m": 6.112201168921786,
+      "true_value": 2.5,
+      "read_value": 2.5003
+    },
+    {
+      "pump": "pump2",
+      "target": [
+        0.0,
+        2.6
+      ],
+      "reached": false,
+      "fell": true,
+      "steps": 39,
+      "doors_crossed": 0,
+      "final_xy": [
+        -2.987450122833252,
+        3.0568203926086426
+      ],
+      "final_dist": 3.022175227798601,
+      "path_length_m": 0.7812402203915407,
+      "true_value": 5.8,
+      "read_value": null
+    }
+  ],
+  "gauge_note": "Gauge values are the verified obstacle-scene readings (gauge_obstacle_results.json), reused as in eval_nav_auto.py; no new camera gauge run is claimed in this script."
+}
+WROTE nav_summary_seq.json walltime=34s success=False

@@ -1,0 +1,61 @@
+Registered Go1Nav
+Warp 1.18.0 initialized:
+   CUDA Toolkit 13.4, Driver 13.0
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L4" (22 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/ubuntu/.cache/warp/1.18.0
+Module mujoco.mjx.warp.ffi 4443472 load on device 'cuda:0' took 0.73 ms  (cached)
+env obs size: {'privileged_state': (145,), 'state': (70,)} action_size: 12
+RESTORE OK from nav checkpoint /home/ubuntu/go1-nav/Go1Nav-20261025-023911/checkpoints/000058982400
+Checkpoint dir: /home/ubuntu/go1-nav-seq/Go1NavSeq-20261025-032046/checkpoints
+Module mujoco.mjx.third_party.mujoco_warp._src.smooth 9b1e724 load on device 'cuda:0' took 4.64 ms  (cached)
+Module _nxn_broadphase__locals__kernel_a903ee65 a903ee6 load on device 'cuda:0' took 0.63 ms  (cached)
+Module _nxn_broadphase__locals__kernel_a903ee65 2c6a5c7 load on device 'cuda:0' took 0.55 ms  (cached)
+Module _primitive_narrowphase__locals__primitive_narrowphase_f84c77c7 f84c77c load on device 'cuda:0' took 0.66 ms  (cached)
+Module mujoco.mjx.third_party.mujoco_warp._src.constraint 8d4d513 load on device 'cuda:0' took 0.53 ms  (cached)
+Module _friction_dof__locals__kernel_febe3015 febe301 load on device 'cuda:0' took 0.54 ms  (cached)
+Module _limit_slide_hinge__locals__kernel_b1bbc842 b1bbc84 load on device 'cuda:0' took 0.56 ms  (cached)
+Module _efc_contact_init__locals__kernel_3a7c064e 3a7c064 load on device 'cuda:0' took 0.52 ms  (cached)
+Module _efc_contact_jac_dense__locals__kernel_b0c1fdf8 5fcbd59 load on device 'cuda:0' took 0.60 ms  (cached)
+Module _efc_contact_update__locals__kernel_efb3ac6e efb3ac6 load on device 'cuda:0' took 0.61 ms  (cached)
+Module mujoco.mjx.third_party.mujoco_warp._src.sensor 8feaecd load on device 'cuda:0' took 1.01 ms  (cached)
+Module _contact_match_builder__locals___contact_match_4da0430b 4da0430 load on device 'cuda:0' took 0.57 ms  (cached)
+Module _contact_sort__locals__contact_sort_bed1da43 6afef3a load on device 'cuda:0' took 0.55 ms  (cached)
+Module mujoco.mjx.third_party.mujoco_warp._src.forward 8f2ef84 load on device 'cuda:0' took 0.98 ms  (cached)
+Module mujoco.mjx.third_party.mujoco_warp._src.passive 0a5f855 load on device 'cuda:0' took 1.11 ms  (cached)
+Module _qfrc_passive_kernel__locals__kernel_976399dd 976399d load on device 'cuda:0' took 0.52 ms  (cached)
+Module _qfrc_smooth__locals__kernel_8b823980 8b82398 load on device 'cuda:0' took 0.47 ms  (cached)
+Module mujoco.mjx.third_party.mujoco_warp._src.support 970ef9a load on device 'cuda:0' took 0.42 ms  (cached)
+Module _tile_cholesky_factorize_solve_block__locals__kernel_3c544b6e 564f1e2 load on device 'cuda:0' took 37.53 ms  (cached)
+Module _solve_init_dof__locals__kernel_60896b56 60896b5 load on device 'cuda:0' took 0.45 ms  (cached)
+Module mujoco.mjx.third_party.mujoco_warp._src.solver 51bb199 load on device 'cuda:0' took 0.68 ms  (cached)
+Module _solve_init_jaref_kernel__locals__kernel_f7cae18b f7cae18 load on device 'cuda:0' took 0.48 ms  (cached)
+Module mul_m_kernel__locals___mul_m_f3de1cc7 f3de1cc load on device 'cuda:0' took 0.46 ms  (cached)
+Module _update_constraint_efc__locals__kernel_0539aa50 0539aa5 load on device 'cuda:0' took 0.51 ms  (cached)
+Module _update_constraint_init_qfrc_constraint_dense__locals__kernel_bd7ca2ec bd7ca2e load on device 'cuda:0' took 0.47 ms  (cached)
+Module _update_gradient_zero_grad_dot__locals__kernel_b20934d7 b20934d load on device 'cuda:0' took 0.44 ms  (cached)
+Module _update_gradient_grad__locals__kernel_c876081d c876081 load on device 'cuda:0' took 0.48 ms  (cached)
+Module _update_gradient_JTDAJ_dense_tiled__locals__kernel_462587fc 5be2110 load on device 'cuda:0' took 1.06 ms  (cached)
+Module _update_gradient_cholesky__locals__kernel_5d37b712 3092a2d load on device 'cuda:0' took 41.71 ms  (cached)
+Module _linesearch_iterative_kernel__locals__kernel_d6065972 96de87a load on device 'cuda:0' took 0.71 ms  (cached)
+Module _update_constraint_efc__locals__kernel_e953547e e953547 load on device 'cuda:0' took 0.67 ms  (cached)
+Module _update_constraint_init_qfrc_constraint_dense__locals__kernel_d92a3413 d92a341 load on device 'cuda:0' took 0.46 ms  (cached)
+Module _update_gradient_zero_grad_dot__locals__kernel_e9f8c963 e9f8c96 load on device 'cuda:0' took 0.48 ms  (cached)
+Module _update_gradient_grad__locals__kernel_87959044 8795904 load on device 'cuda:0' took 0.43 ms  (cached)
+Module _update_gradient_cholesky__locals__kernel_5bef8016 d05526c load on device 'cuda:0' took 43.84 ms  (cached)
+Module _solve_done__locals__kernel_97304d50 97304d5 load on device 'cuda:0' took 0.55 ms  (cached)
+Module _next_time_builder__locals___next_time_bc454e15 bc454e1 load on device 'cuda:0' took 0.68 ms  (cached)
+0: reward=29.698 (JIT+train so far 69s)
+6553600: reward=45.185 (JIT+train so far 254s)
+13107200: reward=44.454 (JIT+train so far 283s)
+19660800: reward=47.361 (JIT+train so far 313s)
+26214400: reward=47.537 (JIT+train so far 342s)
+32768000: reward=50.104 (JIT+train so far 371s)
+39321600: reward=49.970 (JIT+train so far 400s)
+45875200: reward=48.125 (JIT+train so far 430s)
+52428800: reward=46.752 (JIT+train so far 459s)
+58982400: reward=46.839 (JIT+train so far 488s)
+Done training.
+Time to JIT compile: 68.6s (first progress callback)

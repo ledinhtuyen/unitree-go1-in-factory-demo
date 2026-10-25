@@ -34,3 +34,10 @@ venv/
 !checkpoints/go1-nav/000058982400/**
 # Autonomous demo video (included alongside the waypoint demo video)
 !factory_nav_auto_demo.mp4
+# Sequential demo videos (v1 and v2 retrain)
+!factory_nav_seq_demo.mp4
+!factory_nav_seq_demo_v2.mp4
+# Sequential v2 checkpoint (included; other checkpoints stay excluded)
+!checkpoints/go1-nav-seq/
+!checkpoints/go1-nav-seq/000058982400/
+!checkpoints/go1-nav-seq/000058982400/**

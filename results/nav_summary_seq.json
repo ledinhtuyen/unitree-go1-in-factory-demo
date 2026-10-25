@@ -1,0 +1,62 @@
+{
+  "mode": "sequential_autonomous_no_waypoint_no_reset",
+  "ckpt": "/home/ubuntu/go1-nav/Go1Nav-20261025-023911/checkpoints/000058982400",
+  "start": [
+    -4.5,
+    -2.5
+  ],
+  "total_step_limit": 2500,
+  "total_steps": 289,
+  "total_path_m": 6.942434674239058,
+  "total_doors_crossed": 2,
+  "pumps_reached": 1,
+  "pumps_total": 3,
+  "success": false,
+  "fell": true,
+  "failed_segment": "pump2",
+  "segment_boundaries": [
+    249,
+    288
+  ],
+  "segments": [
+    {
+      "pump": "pump1",
+      "target": [
+        -3.0,
+        2.6
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 250,
+      "doors_crossed": 2,
+      "final_xy": [
+        -2.946193218231201,
+        2.3015270233154297
+      ],
+      "final_dist": 0.3032841696746852,
+      "path_length_m": 6.112201168921786,
+      "true_value": 2.5,
+      "read_value": 2.5003
+    },
+    {
+      "pump": "pump2",
+      "target": [
+        0.0,
+        2.6
+      ],
+      "reached": false,
+      "fell": true,
+      "steps": 39,
+      "doors_crossed": 0,
+      "final_xy": [
+        -2.987450122833252,
+        3.0568203926086426
+      ],
+      "final_dist": 3.022175227798601,
+      "path_length_m": 0.7812402203915407,
+      "true_value": 5.8,
+      "read_value": null
+    }
+  ],
+  "gauge_note": "Gauge values are the verified obstacle-scene readings (gauge_obstacle_results.json), reused as in eval_nav_auto.py; no new camera gauge run is claimed in this script."
+}
