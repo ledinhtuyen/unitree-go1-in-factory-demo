@@ -27,8 +27,10 @@ venv/
 !logs/
 !logs/*.log
 
-# Autonomous navigation checkpoint exception (final only)
+# Autonomous nav final checkpoint (included; other checkpoints stay excluded)
 !checkpoints/
 !checkpoints/go1-nav/
 !checkpoints/go1-nav/000058982400/
 !checkpoints/go1-nav/000058982400/**
+# Autonomous demo video (included alongside the waypoint demo video)
+!factory_nav_auto_demo.mp4

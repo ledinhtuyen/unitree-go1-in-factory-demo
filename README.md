@@ -153,13 +153,24 @@ way headless — training and checkpoints are unaffected.
 
 ## Excluded files (deliberately NOT in this clean copy)
 
-- **Other checkpoints** (`go1-50m/...`, `go1-obstacle/...`, 15 MB each
+> Update (autonomous nav): the exclusions below were written for the
+> waypoint-mode clean copy. They are superseded in three places by the
+> Autonomous navigation section below: (1) the FINAL navigation
+> checkpoint checkpoints/go1-nav/000058982400 IS included (the only
+> checkpoint exception in .gitignore); other checkpoints (go1-50m,
+> go1-obstacle) remain excluded. (2) Training and evaluation logs
+> ARE kept in logs/ (see the .gitignore logs exception). (3) TWO
+> videos are kept: factory_obstacle_demo.mp4 (waypoint mode) and
+> factory_nav_auto_demo.mp4 (autonomous mode).
+> Everything else below still applies.
+
+- **Checkpoints** (`go1-50m/...`, `go1-obstacle/...`, 15 MB each
   logdir, 1.6 MB per checkpoint): excluded by `.gitignore`.
-  The one exception is the autonomous navigation checkpoint in
-  `checkpoints/go1-nav/000058982400` (see below). Originals are
-  kept on the training instance and were **not** deleted for
-  this cleanup.
-- **Other logs**: only `logs/go1-50m.log`, `logs/go1-obstacle.log` and `logs/go1-nav.log` are kept; other `*.log` files are excluded.
+  To reproduce the video without the included mp4, retrain with
+  the commands above; the obstacle checkpoint path is recorded
+  in Results. Originals are kept on the training instance and
+  were **not** deleted for this cleanup.
+- **Logs** (`*.log`): training / nav / render logs, excluded.
 - **Trajectories** (`*.npz`, 0.3-1.1 MB each): intermediate
   nav trajectories, excluded; rerun `nav_obstacle.py` to
   regenerate them.
@@ -172,30 +183,140 @@ way headless — training and checkpoints are unaffected.
   this cleanup; this `factory-github/` copy is a separate,
   clean copy, not a move.
 
-## Autonomous navigation checkpoint (included)
+## Autonomous navigation (no waypoint controller)
 
-- Path: `checkpoints/go1-nav/000058982400` (Brax/Orbax checkpoint,
-  1.7 MB, `commit_success.txt` present). This is the final
-  checkpoint of the autonomous door-finding training: the policy
-  itself receives navigation observations, with no waypoint
-  controller.
-- Training: `train_nav.py`, environment `Go1Nav`, requested
-  50,000,000 timesteps, final checkpoint step 58,982,400,
-  JIT compile 62.8 s. Final training log: `logs/go1-nav.log`
-  (last eval rewards: 45,875,200 -> 11.725, 52,428,800 -> 11.834,
-  58,982,400 -> 11.311).
-- Status: training is complete. Autonomous evaluation from a
-  start zone to each pump on this final checkpoint has not yet
-  been run, so no autonomous nav success claim is made here.
-- Architecture, read from the checkpoint's
-  `ppo_network_config.json` (Brax PPO, no values guessed):
-  - Policy network: MLP hidden layers [512, 256, 128],
-    activation `silu`, kernel init `lecun_uniform`,
-    observation key `state`, observation size 70.
-  - Value network: MLP hidden layers [512, 256, 128],
-    activation `silu`, kernel init `lecun_uniform`,
-    observation key `privileged_state`, observation size 145.
-  - Distribution: `tanh_normal`, `init_noise_std` 1.0,
-    `noise_std_type` scalar, `state_dependent_std` false.
-  - `use_distributional_critic` false, `num_quantiles` 32,
-    `normalize_observations` true, `action_size` 12.
+The waypoint controller in `scripts/nav_obstacle.py` is **not** used here.
+`scripts/nav_env.py` defines a new MJX env, `Go1Nav`, that loads the same
+`scenes/factory_obstacle.xml` and gives the policy map-derived navigation
+features as part of its observation. At evaluation
+(`scripts/eval_nav_auto.py`) the only target information given is the
+target pump index, set once at reset; the policy then outputs joint
+actions directly until it reaches the pump, falls, or hits the 1500-step
+limit. No waypoint list, no door-centre steering, and no joystick
+commands are used at evaluation time.
+
+Observation, policy `state` (70 dims), in exact order:
+- proprioception (45): local linvel 3, gyro 3, gravity 3, joint angles
+  minus default pose 12, joint velocities 12, last action 12
+- navigation (25): target local dx, dy / 6 (2), target distance / 6 (1),
+  sin/cos heading error to target (2), current-door local dx, dy / 6 (2),
+  current-door distance / 6 (1), sin/cos heading error to current door (2),
+  distances / 6 to all 5 doors (5), zone one-hot south/middle/north (3),
+  analytic clearance / 3 in body fwd/left/right/back directions (4),
+  target one-hot (3)
+- value `privileged_state` (145 dims) = state (70) + the same 75 extra
+  features as the joystick env (clean gyro/accel/gravity/linvel/angvel,
+  joint angles/velocities, actuator forces, foot contacts, foot velocities,
+  foot air times, torso external force, perturbation flag)
+
+Navigation features are computed from the robot pose and the known map
+(pump positions, door positions, wall segments). The clearance is an
+analytic raycast against known axis-aligned wall segments and circles
+(crates/pillars + 0.25 m robot radius), capped at 3 m. This is
+map-derived sensing, not a camera or lidar. The "current door" feature
+is: the south door nearest the target while in the south zone, the north
+door for the target pump while in the middle zone, the target itself in
+the north zone. It is an observation feature, not a controller: the
+policy still has to walk, turn, and pass the door by itself.
+
+Reward (see `scripts/nav_env.py` for exact weights): the joystick
+stability terms (same scales as the flat env) plus navigation terms
+that dominate door/target behaviour — progress toward the target
+`(prev_dist - dist) / dt` at scale 1.0, +50 per upward zone change
+(south->middle or middle->north, which can only happen through a door
+gap), +100 on reaching within 0.35 m (reaching also ends the episode),
+-1.0 per step while stalled (speed < 0.15 m/s with the waypoint > 0.5 m
+away), and -0.1 per step time penalty. The reward also tracks a
+map-derived desired velocity toward the current door/target (training
+shaping only; it is never fed to the policy and never used at
+evaluation). Start positions are randomised per episode: 80% south zone,
+20% middle zone; target pump uniform among the 3.
+
+Training (`scripts/train_nav.py`): Brax PPO, 50,000,000 requested steps,
+num_envs 1024, seed 1, env `Go1Nav`, logdir `go1-nav`, experiment
+`Go1Nav-20261025-023911`. Because the nav observation is larger than
+the joystick observation (70 vs 48 / 145 vs 123), the obstacle
+checkpoint could not be restored verbatim. Weight surgery (documented
+in `train_nav.py`): policy/value first-layer kernels copy the 45
+proprioceptive rows verbatim, nav rows are N(0, 0.01), value privileged
+extras copy old rows 48:123 to new rows 70:145, deeper layers and biases
+copy verbatim, normalizer proprio means/stds copy and nav means are 0 /
+stds 1; the optimizer state is fresh. A short script-verification run
+(logdir `go1-nav-smoke`, final step 14,745,600, reward 0.016 -> 12.633)
+already reached all 3 pumps autonomously, before the full run below.
+
+Full-run eval reward (from `logs/go1-nav.log`): 0.016 -> 7.235 ->
+11.366 -> 12.059 -> 12.719 -> 11.957 -> 12.797 -> 11.725 -> 11.834 ->
+11.311 at final step 58,982,400 (JIT ~63 s, train ~470 s). These eval
+rewards are in the nav env and are not comparable to flat/obstacle
+joystick eval rewards.
+
+Autonomous evaluation, final checkpoint, from a fixed south-zone start
+(-4.5, -2.5, facing north), 1500-step limit, no waypoint controller
+(`results/nav_summary_auto.json`):
+- pump1: REACHED, 250 steps, 2 doors crossed, final distance 0.303 m,
+  path 6.11 m, no fall
+- pump2: REACHED, 268 steps, 2 doors crossed, final distance 0.331 m,
+  path 6.75 m, no fall
+- pump3: REACHED, 429 steps, 2 doors crossed, final distance 0.336 m,
+  path 9.97 m, no fall
+- Total: 3/3 pumps, 947 steps, 0 falls
+
+Baseline ablation, same test with the old obstacle policy and the
+waypoint controller disabled (fixed forward command [1, 0, 0], no
+steering; `results/nav_summary_baseline_auto.json`):
+- pump1/2/3: NOT reached, 1500 steps each, 0 doors crossed, stuck at
+  (-4.52, -1.24) against the south partition, path ~1.45 m each, no fall
+- Total: 0/3 pumps, 4500 steps. This is the honest contrast: the old
+  policy cannot find doors on its own; the nav policy can.
+
+Gauge reading after reaching (re-run in the obstacle scene,
+`results/gauge_obstacle_results.json`): pump1 true 2.5 -> read 2.5003
+(err 0.0003), pump2 5.8 -> 5.8010 (err 0.0010), pump3 8.1 -> 8.1005
+(err 0.0005) bar.
+
+Video: `factory_nav_auto_demo.mp4` — the actual autonomous trajectory
+(640x480, 25 fps, 15.5 s, 387 frames, 4.0 MB), tracking camera, plus
+gauge close-ups. `factory_obstacle_demo.mp4` is kept for comparison:
+it shows the earlier waypoint-controller mode.
+
+## Model architecture (final navigation checkpoint)
+
+Checkpoint included here: `checkpoints/go1-nav/000058982400/` (1.7 MB,
+14 files, `commit_success.txt` present). All values below are read
+from that checkpoint's `ppo_network_config.json` and from
+`scripts/nav_env.py` / `scripts/train_nav.py` — not guessed.
+
+- Network type: Brax PPO, two MLPs (policy + value), no vision, no
+  distributional critic (`use_distributional_critic: false`).
+- Policy MLP hidden sizes: [512, 256, 128]; value MLP hidden sizes:
+  [512, 256, 128].
+- Activation: `silu` (swish). Kernel initializer: `lecun_uniform` for
+  both networks. Mean kernel init: none (default).
+- Distribution: `tanh_normal` (bounded actions), `init_noise_std: 1.0`,
+  `noise_std_type: scalar`, `state_dependent_std: false`,
+  `num_quantiles: 32` (unused when distributional critic is off).
+- Observation: policy obs key `state`, shape [70], dtype float32;
+  value obs key `privileged_state`, shape [145], dtype float32.
+  Breakdown: see the observation list in the Autonomous navigation
+  section above (45 proprioceptive + 25 navigation = 70; 70 + 75
+  privileged extras = 145).
+- Normalizer: `normalize_observations: true` (running-statistics
+  normalizer over `state` and `privileged_state`, stored in the
+  checkpoint; nav dims were initialised mean 0 / std 1 in surgery
+  and then updated during training).
+- Action: `action_size: 12` — one motor target per Go1 joint
+  (4 legs x abduction, hip, knee). The env applies
+  `motor_targets = default_pose + action * 0.5` (action_scale 0.5)
+  with the Go1 PD gains Kp 35.0 / Kd 0.5 from the joystick config.
+- Training config (from `scripts/train_nav.py`, which takes the tuned
+  Go1 PPO config): num_envs 1024, requested num_timesteps 50,000,000
+  (Brax final step 58,982,400), seed 1, episode_length 1000,
+  discounting 0.97, learning_rate 3e-4, entropy_cost 1e-2,
+  unroll_length 20, num_minibatches 32, num_updates_per_batch 4,
+  batch_size 256, max_grad_norm 1.0, reward_scaling 1.0,
+  num_evals 10, num_eval_envs 128.
+- Other checkpoints are NOT included (see Excluded files): only this
+  final navigation checkpoint is excepted from the checkpoint exclusion
+  in `.gitignore`. Retrain with `scripts/train_nav.py` to reproduce
+  the obstacle/flat checkpoints, which are deliberately excluded.

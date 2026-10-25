@@ -1,0 +1,67 @@
+{
+  "mode": "autonomous_no_waypoint",
+  "ckpt": "/home/ubuntu/go1-nav/Go1Nav-20261025-023911/checkpoints/000058982400",
+  "total_steps": 947,
+  "total_path_m": 34.4639382221193,
+  "pumps_reached": 3,
+  "pumps_total": 3,
+  "results": [
+    {
+      "pump": "pump1",
+      "target": [
+        -3.0,
+        2.6
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 250,
+      "doors_crossed": 2,
+      "final_xy": [
+        -2.946193218231201,
+        2.3015270233154297
+      ],
+      "final_dist": 0.3032841696746852,
+      "path_length_m": 6.112201168921786,
+      "true_value": 2.5,
+      "read_value": 2.5005
+    },
+    {
+      "pump": "pump2",
+      "target": [
+        0.0,
+        2.6
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 268,
+      "doors_crossed": 2,
+      "final_xy": [
+        0.04293327033519745,
+        2.2713675498962402
+      ],
+      "final_dist": 0.33142503369974236,
+      "path_length_m": 6.746251854769414,
+      "true_value": 5.8,
+      "read_value": 5.8005
+    },
+    {
+      "pump": "pump3",
+      "target": [
+        3.0,
+        2.6
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 429,
+      "doors_crossed": 2,
+      "final_xy": [
+        3.0443296432495117,
+        2.2673678398132324
+      ],
+      "final_dist": 0.33557304906852164,
+      "path_length_m": 9.972426118293644,
+      "true_value": 8.1,
+      "read_value": 8.0998
+    }
+  ]
+}

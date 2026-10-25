@@ -1,0 +1,67 @@
+{
+  "mode": "baseline_fixed_command",
+  "ckpt": "/home/ubuntu/go1-obstacle/Go1JoystickObstacle-20261025-014038/checkpoints/000058982400",
+  "total_steps": 4500,
+  "total_path_m": 6.879001685130647,
+  "pumps_reached": 0,
+  "pumps_total": 3,
+  "results": [
+    {
+      "pump": "pump1",
+      "target": [
+        -3.0,
+        2.6
+      ],
+      "reached": false,
+      "fell": false,
+      "steps": 1500,
+      "doors_crossed": 0,
+      "final_xy": [
+        -4.5191497802734375,
+        -1.2442106008529663
+      ],
+      "final_dist": 4.1334938246736455,
+      "path_length_m": 1.4721212264488284,
+      "true_value": 2.5,
+      "read_value": null
+    },
+    {
+      "pump": "pump2",
+      "target": [
+        0.0,
+        2.6
+      ],
+      "reached": false,
+      "fell": false,
+      "steps": 1500,
+      "doors_crossed": 0,
+      "final_xy": [
+        -4.537875652313232,
+        -1.2462612390518188
+      ],
+      "final_dist": 5.948616726171697,
+      "path_length_m": 1.4458858430428017,
+      "true_value": 5.8,
+      "read_value": null
+    },
+    {
+      "pump": "pump3",
+      "target": [
+        3.0,
+        2.6
+      ],
+      "reached": false,
+      "fell": false,
+      "steps": 1500,
+      "doors_crossed": 0,
+      "final_xy": [
+        -4.461645603179932,
+        -1.2334197759628296
+      ],
+      "final_dist": 8.388758089621927,
+      "path_length_m": 1.44915629015628,
+      "true_value": 8.1,
+      "read_value": null
+    }
+  ]
+}

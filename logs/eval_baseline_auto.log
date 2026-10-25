@@ -1,0 +1,96 @@
+BASELINE: old obstacle policy, fixed command, NO waypoint controller
+pump1 step 0 xy=(-4.50,-2.50) dist=5.32 zone=0
+pump1 step 200 xy=(-4.52,-1.26) dist=4.15 zone=0
+pump1 step 400 xy=(-4.52,-1.24) dist=4.13 zone=0
+pump1 step 600 xy=(-4.52,-1.24) dist=4.13 zone=0
+pump1 step 800 xy=(-4.52,-1.24) dist=4.13 zone=0
+pump1 step 1000 xy=(-4.52,-1.24) dist=4.13 zone=0
+pump1 step 1200 xy=(-4.52,-1.24) dist=4.13 zone=0
+pump1 step 1400 xy=(-4.52,-1.24) dist=4.13 zone=0
+pump1: reached=False fell=False steps=1500 doors_crossed=0 final=(-4.519,-1.244) dist=4.133 path=1.47m
+pump2 step 0 xy=(-4.50,-2.50) dist=6.80 zone=0
+pump2 step 200 xy=(-4.54,-1.26) dist=5.96 zone=0
+pump2 step 400 xy=(-4.54,-1.25) dist=5.95 zone=0
+pump2 step 600 xy=(-4.54,-1.24) dist=5.95 zone=0
+pump2 step 800 xy=(-4.54,-1.24) dist=5.95 zone=0
+pump2 step 1000 xy=(-4.54,-1.24) dist=5.95 zone=0
+pump2 step 1200 xy=(-4.54,-1.24) dist=5.95 zone=0
+pump2 step 1400 xy=(-4.54,-1.25) dist=5.95 zone=0
+pump2: reached=False fell=False steps=1500 doors_crossed=0 final=(-4.538,-1.246) dist=5.949 path=1.45m
+pump3 step 0 xy=(-4.50,-2.50) dist=9.07 zone=0
+pump3 step 200 xy=(-4.47,-1.26) dist=8.41 zone=0
+pump3 step 400 xy=(-4.46,-1.24) dist=8.39 zone=0
+pump3 step 600 xy=(-4.46,-1.24) dist=8.39 zone=0
+pump3 step 800 xy=(-4.46,-1.23) dist=8.39 zone=0
+pump3 step 1000 xy=(-4.46,-1.23) dist=8.39 zone=0
+pump3 step 1200 xy=(-4.46,-1.23) dist=8.39 zone=0
+pump3 step 1400 xy=(-4.46,-1.23) dist=8.39 zone=0
+pump3: reached=False fell=False steps=1500 doors_crossed=0 final=(-4.462,-1.233) dist=8.389 path=1.45m
+{
+  "mode": "baseline_fixed_command",
+  "ckpt": "/home/ubuntu/go1-obstacle/Go1JoystickObstacle-20261025-014038/checkpoints/000058982400",
+  "total_steps": 4500,
+  "total_path_m": 6.879001685130647,
+  "pumps_reached": 0,
+  "pumps_total": 3,
+  "results": [
+    {
+      "pump": "pump1",
+      "target": [
+        -3.0,
+        2.6
+      ],
+      "reached": false,
+      "fell": false,
+      "steps": 1500,
+      "doors_crossed": 0,
+      "final_xy": [
+        -4.5191497802734375,
+        -1.2442106008529663
+      ],
+      "final_dist": 4.1334938246736455,
+      "path_length_m": 1.4721212264488284,
+      "true_value": 2.5,
+      "read_value": null
+    },
+    {
+      "pump": "pump2",
+      "target": [
+        0.0,
+        2.6
+      ],
+      "reached": false,
+      "fell": false,
+      "steps": 1500,
+      "doors_crossed": 0,
+      "final_xy": [
+        -4.537875652313232,
+        -1.2462612390518188
+      ],
+      "final_dist": 5.948616726171697,
+      "path_length_m": 1.4458858430428017,
+      "true_value": 5.8,
+      "read_value": null
+    },
+    {
+      "pump": "pump3",
+      "target": [
+        3.0,
+        2.6
+      ],
+      "reached": false,
+      "fell": false,
+      "steps": 1500,
+      "doors_crossed": 0,
+      "final_xy": [
+        -4.461645603179932,
+        -1.2334197759628296
+      ],
+      "final_dist": 8.388758089621927,
+      "path_length_m": 1.44915629015628,
+      "true_value": 8.1,
+      "read_value": null
+    }
+  ]
+}
+WROTE nav_summary_baseline_auto.json walltime=221s
