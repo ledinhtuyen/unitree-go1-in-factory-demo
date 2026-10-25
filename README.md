@@ -153,13 +153,13 @@ way headless — training and checkpoints are unaffected.
 
 ## Excluded files (deliberately NOT in this clean copy)
 
-- **Checkpoints** (`go1-50m/...`, `go1-obstacle/...`, 15 MB each
+- **Other checkpoints** (`go1-50m/...`, `go1-obstacle/...`, 15 MB each
   logdir, 1.6 MB per checkpoint): excluded by `.gitignore`.
-  To reproduce the video without the included mp4, retrain with
-  the commands above; the obstacle checkpoint path is recorded
-  in Results. Originals are kept on the training instance and
-  were **not** deleted for this cleanup.
-- **Logs** (`*.log`): training / nav / render logs, excluded.
+  The one exception is the autonomous navigation checkpoint in
+  `checkpoints/go1-nav/000058982400` (see below). Originals are
+  kept on the training instance and were **not** deleted for
+  this cleanup.
+- **Other logs**: only `logs/go1-50m.log`, `logs/go1-obstacle.log` and `logs/go1-nav.log` are kept; other `*.log` files are excluded.
 - **Trajectories** (`*.npz`, 0.3-1.1 MB each): intermediate
   nav trajectories, excluded; rerun `nav_obstacle.py` to
   regenerate them.
@@ -171,3 +171,31 @@ way headless — training and checkpoints are unaffected.
 - **Original `/home/ubuntu/factory/` directory**: untouched by
   this cleanup; this `factory-github/` copy is a separate,
   clean copy, not a move.
+
+## Autonomous navigation checkpoint (included)
+
+- Path: `checkpoints/go1-nav/000058982400` (Brax/Orbax checkpoint,
+  1.7 MB, `commit_success.txt` present). This is the final
+  checkpoint of the autonomous door-finding training: the policy
+  itself receives navigation observations, with no waypoint
+  controller.
+- Training: `train_nav.py`, environment `Go1Nav`, requested
+  50,000,000 timesteps, final checkpoint step 58,982,400,
+  JIT compile 62.8 s. Final training log: `logs/go1-nav.log`
+  (last eval rewards: 45,875,200 -> 11.725, 52,428,800 -> 11.834,
+  58,982,400 -> 11.311).
+- Status: training is complete. Autonomous evaluation from a
+  start zone to each pump on this final checkpoint has not yet
+  been run, so no autonomous nav success claim is made here.
+- Architecture, read from the checkpoint's
+  `ppo_network_config.json` (Brax PPO, no values guessed):
+  - Policy network: MLP hidden layers [512, 256, 128],
+    activation `silu`, kernel init `lecun_uniform`,
+    observation key `state`, observation size 70.
+  - Value network: MLP hidden layers [512, 256, 128],
+    activation `silu`, kernel init `lecun_uniform`,
+    observation key `privileged_state`, observation size 145.
+  - Distribution: `tanh_normal`, `init_noise_std` 1.0,
+    `noise_std_type` scalar, `state_dependent_std` false.
+  - `use_distributional_critic` false, `num_quantiles` 32,
+    `normalize_observations` true, `action_size` 12.

@@ -26,3 +26,9 @@ venv/
 # Kept training logs (see logs/)
 !logs/
 !logs/*.log
+
+# Autonomous navigation checkpoint exception (final only)
+!checkpoints/
+!checkpoints/go1-nav/
+!checkpoints/go1-nav/000058982400/
+!checkpoints/go1-nav/000058982400/**

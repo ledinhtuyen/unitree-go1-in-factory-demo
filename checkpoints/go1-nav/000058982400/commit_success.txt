@@ -1,0 +1,1 @@
+Checkpoint commit was successful to /home/ubuntu/go1-nav/Go1Nav-20261025-023911/checkpoints/000058982400
