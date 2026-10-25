@@ -1,0 +1,316 @@
+{
+  "total_steps": 1966,
+  "path_length_m": 17.2704484915365,
+  "doors_passed": 6,
+  "doors_total": 6,
+  "pumps_reached": 3,
+  "pumps_total": 3,
+  "waypoints": [
+    {
+      "name": "door_s_west",
+      "kind": "door",
+      "target": [
+        -2.0,
+        -1.0
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 167,
+      "final_xy": [
+        -2.267545223236084,
+        -1.2137399911880493
+      ],
+      "settle_xy": [
+        -2.267545223236084,
+        -1.2137399911880493
+      ],
+      "final_dist": 0.342440112004294
+    },
+    {
+      "name": "door_s_north",
+      "kind": "waypoint",
+      "target": [
+        -2.0,
+        -0.4
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 64,
+      "final_xy": [
+        -2.0968010425567627,
+        -0.72565096616745
+      ],
+      "settle_xy": [
+        -2.0968010425567627,
+        -0.72565096616745
+      ],
+      "final_dist": 0.3397337098462115
+    },
+    {
+      "name": "mid1",
+      "kind": "waypoint",
+      "target": [
+        -2.0,
+        0.5
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 78,
+      "final_xy": [
+        -2.019918203353882,
+        0.15809966623783112
+      ],
+      "settle_xy": [
+        -2.019918203353882,
+        0.15809966623783112
+      ],
+      "final_dist": 0.34248003306985514
+    },
+    {
+      "name": "door_n1",
+      "kind": "door",
+      "target": [
+        -3.0,
+        1.5
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 99,
+      "final_xy": [
+        -2.8100273609161377,
+        1.2198328971862793
+      ],
+      "settle_xy": [
+        -2.8100273609161377,
+        1.2198328971862793
+      ],
+      "final_dist": 0.3385014166876135
+    },
+    {
+      "name": "pump1",
+      "kind": "pump",
+      "target": [
+        -3.0,
+        2.6
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 83,
+      "final_xy": [
+        -2.9546215534210205,
+        2.261643886566162
+      ],
+      "settle_xy": [
+        -2.9677040576934814,
+        2.2824480533599854
+      ],
+      "final_dist": 0.34138550483576996,
+      "true_value": 2.5,
+      "read_value": 2.5005
+    },
+    {
+      "name": "door_n1_back",
+      "kind": "door",
+      "target": [
+        -3.0,
+        1.5
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 167,
+      "final_xy": [
+        -2.932283639907837,
+        1.8345376253128052
+      ],
+      "settle_xy": [
+        -2.932283639907837,
+        1.8345376253128052
+      ],
+      "final_dist": 0.34132232299406134
+    },
+    {
+      "name": "door_n1_south",
+      "kind": "waypoint",
+      "target": [
+        -3.0,
+        0.9
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 64,
+      "final_xy": [
+        -2.9982173442840576,
+        1.2402634620666504
+      ],
+      "settle_xy": [
+        -2.9982173442840576,
+        1.2402634620666504
+      ],
+      "final_dist": 0.3402681317416963
+    },
+    {
+      "name": "mid2",
+      "kind": "waypoint",
+      "target": [
+        -1.0,
+        0.5
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 150,
+      "final_xy": [
+        -1.3020638227462769,
+        0.663921594619751
+      ],
+      "settle_xy": [
+        -1.3020638227462769,
+        0.663921594619751
+      ],
+      "final_dist": 0.3436754896625247
+    },
+    {
+      "name": "door_n2",
+      "kind": "door",
+      "target": [
+        0.0,
+        1.5
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 113,
+      "final_xy": [
+        -0.2883617579936981,
+        1.3120176792144775
+      ],
+      "settle_xy": [
+        -0.2883617579936981,
+        1.3120176792144775
+      ],
+      "final_dist": 0.34422355584870595
+    },
+    {
+      "name": "pump2",
+      "kind": "pump",
+      "target": [
+        0.0,
+        2.6
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 87,
+      "final_xy": [
+        -0.034146830439567566,
+        2.2621190547943115
+      ],
+      "settle_xy": [
+        0.05082036182284355,
+        2.2774202823638916
+      ],
+      "final_dist": 0.3396020305624778,
+      "true_value": 5.8,
+      "read_value": 5.8005
+    },
+    {
+      "name": "door_n2_back",
+      "kind": "door",
+      "target": [
+        0.0,
+        1.5
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 170,
+      "final_xy": [
+        0.10201123356819153,
+        1.826107144355774
+      ],
+      "settle_xy": [
+        0.10201123356819153,
+        1.826107144355774
+      ],
+      "final_dist": 0.3416901540489303
+    },
+    {
+      "name": "door_n2_south",
+      "kind": "waypoint",
+      "target": [
+        0.0,
+        0.9
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 59,
+      "final_xy": [
+        0.032810717821121216,
+        1.2374610900878906
+      ],
+      "settle_xy": [
+        0.032810717821121216,
+        1.2374610900878906
+      ],
+      "final_dist": 0.3390524008575144
+    },
+    {
+      "name": "mid3",
+      "kind": "waypoint",
+      "target": [
+        1.0,
+        0.5
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 95,
+      "final_xy": [
+        0.7360813021659851,
+        0.7076928615570068
+      ],
+      "settle_xy": [
+        0.7360813021659851,
+        0.7076928615570068
+      ],
+      "final_dist": 0.3358413372533823
+    },
+    {
+      "name": "door_n3",
+      "kind": "door",
+      "target": [
+        3.0,
+        1.5
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 178,
+      "final_xy": [
+        2.6885247230529785,
+        1.356648564338684
+      ],
+      "settle_xy": [
+        2.6885247230529785,
+        1.356648564338684
+      ],
+      "final_dist": 0.34287969064291945
+    },
+    {
+      "name": "pump3",
+      "kind": "pump",
+      "target": [
+        3.0,
+        2.6
+      ],
+      "reached": true,
+      "fell": false,
+      "steps": 92,
+      "final_xy": [
+        2.9280550479888916,
+        2.2651004791259766
+      ],
+      "settle_xy": [
+        2.947753667831421,
+        2.282287836074829
+      ],
+      "final_dist": 0.34254016582224517,
+      "true_value": 8.1,
+      "read_value": 8.0998
+    }
+  ]
+}
