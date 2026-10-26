@@ -1,16 +1,29 @@
 #!/usr/bin/env python3
-"""Watcher for unknown-map exploration: pod sim writes er2_request.json,
+"""Watcher for unknown-map exploration: the sim writes er2_request.json,
 this script calls ER2 via Muse Vault helper and writes er2_answer.json back.
 Fallback to nearest candidate if ER2 output is invalid or helper fails.
-Stops when /workspace/unknown_map/DONE appears on pod, or after 150 minutes.
+Stops when the done flag appears on the sim host, or after 150 minutes.
+
+Usage:
+  python tools/watcher.py --pod-dir /workspace/unknown_map --done-file DONE
+  python tools/watcher.py --pod-dir /workspace/full_run --done-file FULL_DONE
+The two previous copies (unknown-map and full-run) differed only in
+pod dir, done file and temp file name, so they are merged here.
 """
-import ast, json, subprocess, sys, time
+import argparse, ast, json, subprocess, sys, time
 from pathlib import Path
 
 SSH = ["ssh", "-o", "StrictHostKeyChecking=accept-new", "-o", "ConnectTimeout=15",
        "-p", "30151", "-i", str(Path.home() / ".ssh" / "id_ed25519"),
        "root@213.173.105.23"]
-POD = "/workspace/unknown_map"
+ap = argparse.ArgumentParser()
+ap.add_argument("--pod-dir", default="/workspace/unknown_map")
+ap.add_argument("--done-file", default="DONE")
+ap.add_argument("--tmp-file", default="unknown_answer.json")
+_args = ap.parse_args()
+POD = _args.pod_dir
+DONE_FILE = _args.done_file
+TMP_FILE = _args.tmp_file
 HELPER = str(Path.home() / "workspace" / "custom-connectors" / "custom.google-gemini" / "bin" / "gemini.py")
 last_id = -1
 start = time.time()
@@ -50,7 +63,7 @@ def parse_target(raw, candidates):
 
 while time.time() - start < 150 * 60:
     try:
-        done = pod_read(f"{POD}/DONE")
+        done = pod_read(f"{POD}/{DONE_FILE}")
         if done is not None:
             print(f"WATCHER done flag on pod: {done.strip()}", flush=True)
             break
@@ -94,7 +107,7 @@ while time.time() - start < 150 * 60:
                 else:
                     source = "er2"
                 ans = {"id": rid, "target": list(target), "source": source, "raw": raw_out}
-                tmp = Path("/tmp/unknown_answer.json")
+                tmp = Path(f"/tmp/{TMP_FILE}")
                 tmp.write_text(json.dumps(ans))
                 ok = pod_write(str(tmp), f"{POD}/er2_answer.json")
                 print(f"WATCHER answered id={rid} target={target} source={source} scp_ok={ok}", flush=True)

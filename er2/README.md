@@ -1,4 +1,4 @@
-# Go1 + Gemini Robotics ER 2 — factory gauge missions (RunPod, 2026-10-26)
+# Go1 + Gemini Robotics ER 2 — factory gauge missions (2026-10-26)
 
 ER 2 (`gemini-robotics-er-2-preview`, Gemini API Interactions) plans waypoints;
 a Unitree Go1 in MuJoCo/MJX executes them. Original playground repo:
@@ -8,10 +8,10 @@ Only the new planners, scenes, sim scripts, logs and videos are in this bundle.
 ## Results (all in simulation, not hardware)
 
 - Simple maze: Trial 1 Success, ER 2 waypoints [(0,0),(4,0),(4,4)], 498 steps.
-  Video: `er2_mission/er2_nav_full.mp4`
+  Video: `mission/er2_nav_full.mp4`
 - Complex factory 12x8, 5 gauges: Success step 2570/6000, plan matched
   cell-for-cell. Gauges: G4 3.7 step 268, G2 5.8 step 787, G5 6.4 step 1104,
-  G3 8.1 step 1498, G1 2.5 step 2540. Video: `factory_er2/factory_er2_full.mp4`
+  G3 8.1 step 1498, G1 2.5 step 2540. Video: `factory/factory_er2_full.mp4`
 - Maze2 16x10, 6 real analog dial gauges: Success step 4797, ER 2 v2
   (v1 entered wall (1,7)). Gauges: G4 3.7 step 437, G2 5.8 step 1038,
   G5 6.4 step 1736, G6 4.2 step 2208, G3 8.1 step 2721, G1 2.5 step 4766.
@@ -46,8 +46,8 @@ Only the new planners, scenes, sim scripts, logs and videos are in this bundle.
 - `planners/er2_vertex_navigator.py` — Vertex variant (private preview;
   live test returned model-not-found / Interactions-unsupported, not
   an auth/billing failure). Mock-tested only.
-- `factory_er2/`, `maze2/`, `unknown_map/` — scene XML, grid, waypoints,
-  sim scripts, logs, videos. `unknown_map/unknown_map_watcher.py` ran on
+- `factory/`, `maze2/`, `unknown_map/` — scene XML, grid, waypoints,
+  sim scripts, logs, videos. `tools/watcher.py` (repo root) ran on
   the assistant VM and answered the pod's ER 2 requests via a Secure Vault
   key (the key itself is not in this bundle, and never goes in chat).
 - Logs are kept; originals on the pod were not deleted.
