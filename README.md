@@ -125,9 +125,16 @@ preview restriction, not an auth or billing failure.
   cell) then found the remaining G4, G1, G2 in 4425 steps, for
   6/6 across the two runs.
 - Unified full run (exploration + sweep in one continuous run,
-  no restart): in progress at the time of this README cleanup;
-  its video and script are added to `runpod-er2/unknown_map/`
-  when it finishes, and this section is updated with its numbers.
+  no restart): Success, 13818 steps, video
+  `runpod-er2/unknown_map/full_run/full_run.mp4` (640x480, 7.5 fps,
+  92.1 s). Exploration (14 ER 2 frontier decisions) ended
+  NoFrontier at step 7686 with a perfect 160/160-cell map, then
+  the same run switched to BFS sweep of unvisited cells.
+  Gauges in order: G5 6.4 visual 6.31 step 1166, G3 8.1 visual
+  7.95 step 2646, G6 4.2 visual 4.22 step 4944, G1 2.5 visual
+  2.62 step 6679, G2 5.8 visual 5.74 step 10418, G4 3.7 visual
+  3.75 step 13787. Together: 6/6 gauges in a single run with no
+  prior map.
 
 ## How to train and run (Brev work)
 
