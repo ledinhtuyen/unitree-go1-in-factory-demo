@@ -4,10 +4,10 @@ A Unitree Go1 quadruped in MuJoCo / MJX walks a demo factory hall,
 passes through doors, stops at pumps, and reads their analog gauges.
 Two lines of work live in this repo:
 
-1. **Brev (trained policies)** — Brax PPO policies trained on a
+1. **Trained policies** — Brax PPO policies trained on a
    12 m x 8 m factory hall, from waypoint control to autonomous
    navigation and multi-target continuation.
-2. **RunPod (Gemini Robotics ER 2 planning)** — ER 2 plans waypoints
+2. **ER 2 planning** — ER 2 plans waypoints
    on a grid map, and the same Go1 controller executes them,
    including a version where the map is not known in advance.
 
@@ -30,14 +30,12 @@ is stated explicitly.
   obstacle) are excluded by `.gitignore`; retrain to reproduce them.
 - `logs/` — training and evaluation logs are kept.
 - `results/` — JSON summaries for the runs below.
-- `factory_obstacle_demo.mp4`, `factory_nav_auto_demo.mp4`,
-  `factory_nav_seq_demo.mp4`, `factory_nav_seq_demo_v2.mp4` —
-  Brev videos (waypoint, autonomous, sequential v1, sequential v2).
-- `runpod-er2/` — the RunPod ER 2 work: planners, scenes, sim
+- `videos/trained/` — demo videos (waypoint, autonomous, sequential v1, sequential v2).
+- `er2/` — the ER 2 work: planners, scenes, sim
   scripts, logs, videos and close-up gauge images. See its own
   `README.md` for the full ER 2 report.
 
-## Brev results (verified on the instance)
+## Trained-policy results
 
 ### Waypoint navigation, obstacle hall
 
@@ -97,11 +95,11 @@ tanh_normal, init_noise_std 1.0, state 70 / privileged_state 145,
 action 12, normalize_observations true. Read from each
 checkpoint's `ppo_network_config.json`, not guessed.
 
-## RunPod ER 2 results (simulation, 2026-10-26)
+## ER 2 planning results (simulation, 2026-10-26)
 
 Planner: `gemini-robotics-er-2-preview` via the Gemini API
 Interactions API (not a drop-in model-name change from the
-original Gemini 2.0 Thinking planner; see `runpod-er2/planners/`).
+original Gemini 2.0 Thinking planner; see `er2/planners/`).
 The Vertex variant is mock-tested only: live Vertex tests returned
 model-not-found / Interactions-unsupported, which is a private
 preview restriction, not an auth or billing failure.
@@ -126,7 +124,7 @@ preview restriction, not an auth or billing failure.
   6/6 across the two runs.
 - Unified full run (exploration + sweep in one continuous run,
   no restart): Success, 13818 steps, video
-  `runpod-er2/unknown_map/full_run/full_run.mp4` (640x480, 7.5 fps,
+  `er2/unknown_map/full_run/full_run.mp4` (640x480, 7.5 fps,
   92.1 s). Exploration (14 ER 2 frontier decisions) ended
   NoFrontier at step 7686 with a perfect 160/160-cell map, then
   the same run switched to BFS sweep of unvisited cells.
@@ -136,7 +134,7 @@ preview restriction, not an auth or billing failure.
   3.75 step 13787. Together: 6/6 gauges in a single run with no
   prior map.
 
-## How to train and run (Brev work)
+## How to train and run (trained policies)
 
 Prerequisites as used on the instance: Python 3.12, a venv with
 `mujoco_playground`, `brax 0.14.2`, `jax 0.10.1` with
