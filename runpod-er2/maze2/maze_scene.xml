@@ -1,0 +1,240 @@
+<mujoco model="go1 scene">
+  <include file="go1_mjx.xml"/>
+
+  <statistic center="0 0 0.1" extent="0.8" meansize="0.04"/>
+
+  <visual>
+    <headlight diffuse=".8 .8 .8" ambient=".2 .2 .2" specular="1 1 1"/>
+    <rgba force="1 0 0 1"/>
+    <global azimuth="120" elevation="-20"/>
+    <map force="0.01"/>
+    <scale forcewidth="0.3" contactwidth="0.5" contactheight="0.2"/>
+    <quality shadowsize="8192"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="1 1 1" rgb2="1 1 1" width="800" height="800"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="1 1 1" rgb2="1 1 1" markrgb="0 0 0"
+      width="300" height="300"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0"/>
+    <material name="box_material" shininess="0.1" specular="0.4" roughness="0.3" />
+  </asset>
+
+  <worldbody>
+    <geom name="floor" size="0 0 0.01" type="plane" material="groundplane" priority="1" friction="0.6" condim="3" contype="1" conaffinity="0"/>
+
+<body name="box_body1" pos="0.5 5.5 0.5">
+      <geom name="static_box1" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body2" pos="1.5 7.5 0.5">
+      <geom name="static_box2" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body3" pos="2.5 2.5 0.5">
+      <geom name="static_box3" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body4" pos="2.5 5.5 0.5">
+      <geom name="static_box4" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body5" pos="3.5 5.5 0.5">
+      <geom name="static_box5" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body6" pos="3.5 9.5 0.5">
+      <geom name="static_box6" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body7" pos="4.5 0.5 0.5">
+      <geom name="static_box7" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body8" pos="4.5 1.5 0.5">
+      <geom name="static_box8" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body9" pos="4.5 3.5 0.5">
+      <geom name="static_box9" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body10" pos="4.5 4.5 0.5">
+      <geom name="static_box10" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body11" pos="4.5 5.5 0.5">
+      <geom name="static_box11" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body12" pos="4.5 6.5 0.5">
+      <geom name="static_box12" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body13" pos="4.5 8.5 0.5">
+      <geom name="static_box13" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body14" pos="4.5 9.5 0.5">
+      <geom name="static_box14" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body15" pos="5.5 0.5 0.5">
+      <geom name="static_box15" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body16" pos="5.5 3.5 0.5">
+      <geom name="static_box16" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body17" pos="6.5 8.5 0.5">
+      <geom name="static_box17" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body18" pos="7.5 1.5 0.5">
+      <geom name="static_box18" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body19" pos="7.5 3.5 0.5">
+      <geom name="static_box19" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body20" pos="8.5 0.5 0.5">
+      <geom name="static_box20" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body21" pos="8.5 2.5 0.5">
+      <geom name="static_box21" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body22" pos="8.5 3.5 0.5">
+      <geom name="static_box22" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body23" pos="8.5 4.5 0.5">
+      <geom name="static_box23" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body24" pos="8.5 6.5 0.5">
+      <geom name="static_box24" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body25" pos="8.5 7.5 0.5">
+      <geom name="static_box25" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body26" pos="8.5 9.5 0.5">
+      <geom name="static_box26" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body27" pos="9.5 2.5 0.5">
+      <geom name="static_box27" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body28" pos="9.5 6.5 0.5">
+      <geom name="static_box28" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body29" pos="9.5 7.5 0.5">
+      <geom name="static_box29" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body30" pos="10.5 2.5 0.5">
+      <geom name="static_box30" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body31" pos="10.5 4.5 0.5">
+      <geom name="static_box31" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body32" pos="11.5 7.5 0.5">
+      <geom name="static_box32" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body33" pos="12.5 0.5 0.5">
+      <geom name="static_box33" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body34" pos="12.5 1.5 0.5">
+      <geom name="static_box34" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body35" pos="12.5 2.5 0.5">
+      <geom name="static_box35" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body36" pos="12.5 4.5 0.5">
+      <geom name="static_box36" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body37" pos="12.5 5.5 0.5">
+      <geom name="static_box37" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body38" pos="12.5 7.5 0.5">
+      <geom name="static_box38" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body39" pos="12.5 8.5 0.5">
+      <geom name="static_box39" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body40" pos="12.5 9.5 0.5">
+      <geom name="static_box40" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body41" pos="13.5 4.5 0.5">
+      <geom name="static_box41" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body42" pos="13.5 6.5 0.5">
+      <geom name="static_box42" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body43" pos="13.5 8.5 0.5">
+      <geom name="static_box43" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body44" pos="14.5 1.5 0.5">
+      <geom name="static_box44" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body45" pos="14.5 8.5 0.5">
+      <geom name="static_box45" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="box_body46" pos="15.5 4.5 0.5">
+      <geom name="static_box46" type="box" size="0.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/>
+    </body>
+    <body name="dial_G1" pos="1.5 8.5 0.02"><geom name="dial_geom_G1" type="cylinder" size="0.35 0.02" rgba="1 1 1 1" contype="0" conaffinity="0"/></body>
+<body name="tick_G1_-120" pos="1.249 8.355 0.045"><geom name="tick_geom_G1_-120" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.500000 0 0 0.866025" contype="0" conaffinity="0"/></body>
+<body name="tick_G1_-60" pos="1.249 8.645 0.045"><geom name="tick_geom_G1_-60" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.866025 0 0 0.500000" contype="0" conaffinity="0"/></body>
+<body name="tick_G1_0" pos="1.500 8.790 0.045"><geom name="tick_geom_G1_0" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="1.000000 0 0 -0.000000" contype="0" conaffinity="0"/></body>
+<body name="tick_G1_60" pos="1.751 8.645 0.045"><geom name="tick_geom_G1_60" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.866025 0 0 -0.500000" contype="0" conaffinity="0"/></body>
+<body name="tick_G1_120" pos="1.751 8.355 0.045"><geom name="tick_geom_G1_120" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.500000 0 0 -0.866025" contype="0" conaffinity="0"/></body>
+<body name="needle_G1" pos="1.396 8.560 0.05"><geom name="needle_geom_G1" type="box" size="0.03 0.22 0.01" rgba="1 0 0 1" quat="0.866025 0 0 0.500000" contype="0" conaffinity="0"/></body>
+<body name="hub_G1" pos="1.5 8.5 0.055"><geom name="hub_geom_G1" type="cylinder" size="0.06 0.015" rgba="0.2 0.2 0.2 1" contype="0" conaffinity="0"/></body>
+<body name="dial_G2" pos="6.5 0.5 0.02"><geom name="dial_geom_G2" type="cylinder" size="0.35 0.02" rgba="1 1 1 1" contype="0" conaffinity="0"/></body>
+<body name="tick_G2_-120" pos="6.249 0.355 0.045"><geom name="tick_geom_G2_-120" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.500000 0 0 0.866025" contype="0" conaffinity="0"/></body>
+<body name="tick_G2_-60" pos="6.249 0.645 0.045"><geom name="tick_geom_G2_-60" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.866025 0 0 0.500000" contype="0" conaffinity="0"/></body>
+<body name="tick_G2_0" pos="6.500 0.790 0.045"><geom name="tick_geom_G2_0" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="1.000000 0 0 -0.000000" contype="0" conaffinity="0"/></body>
+<body name="tick_G2_60" pos="6.751 0.645 0.045"><geom name="tick_geom_G2_60" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.866025 0 0 -0.500000" contype="0" conaffinity="0"/></body>
+<body name="tick_G2_120" pos="6.751 0.355 0.045"><geom name="tick_geom_G2_120" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.500000 0 0 -0.866025" contype="0" conaffinity="0"/></body>
+<body name="needle_G2" pos="6.539 0.613 0.05"><geom name="needle_geom_G2" type="box" size="0.03 0.22 0.01" rgba="1 0 0 1" quat="0.985996 0 0 -0.166769" contype="0" conaffinity="0"/></body>
+<body name="hub_G2" pos="6.5 0.5 0.055"><geom name="hub_geom_G2" type="cylinder" size="0.06 0.015" rgba="0.2 0.2 0.2 1" contype="0" conaffinity="0"/></body>
+<body name="dial_G3" pos="14.5 7.5 0.02"><geom name="dial_geom_G3" type="cylinder" size="0.35 0.02" rgba="1 1 1 1" contype="0" conaffinity="0"/></body>
+<body name="tick_G3_-120" pos="14.249 7.355 0.045"><geom name="tick_geom_G3_-120" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.500000 0 0 0.866025" contype="0" conaffinity="0"/></body>
+<body name="tick_G3_-60" pos="14.249 7.645 0.045"><geom name="tick_geom_G3_-60" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.866025 0 0 0.500000" contype="0" conaffinity="0"/></body>
+<body name="tick_G3_0" pos="14.500 7.790 0.045"><geom name="tick_geom_G3_0" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="1.000000 0 0 -0.000000" contype="0" conaffinity="0"/></body>
+<body name="tick_G3_60" pos="14.751 7.645 0.045"><geom name="tick_geom_G3_60" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.866025 0 0 -0.500000" contype="0" conaffinity="0"/></body>
+<body name="tick_G3_120" pos="14.751 7.355 0.045"><geom name="tick_geom_G3_120" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.500000 0 0 -0.866025" contype="0" conaffinity="0"/></body>
+<body name="needle_G3" pos="14.616 7.532 0.05"><geom name="needle_geom_G3" type="box" size="0.03 0.22 0.01" rgba="1 0 0 1" quat="0.796530 0 0 -0.604599" contype="0" conaffinity="0"/></body>
+<body name="hub_G3" pos="14.5 7.5 0.055"><geom name="hub_geom_G3" type="cylinder" size="0.06 0.015" rgba="0.2 0.2 0.2 1" contype="0" conaffinity="0"/></body>
+<body name="dial_G4" pos="2.5 1.5 0.02"><geom name="dial_geom_G4" type="cylinder" size="0.35 0.02" rgba="1 1 1 1" contype="0" conaffinity="0"/></body>
+<body name="tick_G4_-120" pos="2.249 1.355 0.045"><geom name="tick_geom_G4_-120" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.500000 0 0 0.866025" contype="0" conaffinity="0"/></body>
+<body name="tick_G4_-60" pos="2.249 1.645 0.045"><geom name="tick_geom_G4_-60" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.866025 0 0 0.500000" contype="0" conaffinity="0"/></body>
+<body name="tick_G4_0" pos="2.500 1.790 0.045"><geom name="tick_geom_G4_0" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="1.000000 0 0 -0.000000" contype="0" conaffinity="0"/></body>
+<body name="tick_G4_60" pos="2.751 1.645 0.045"><geom name="tick_geom_G4_60" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.866025 0 0 -0.500000" contype="0" conaffinity="0"/></body>
+<body name="tick_G4_120" pos="2.751 1.355 0.045"><geom name="tick_geom_G4_120" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.500000 0 0 -0.866025" contype="0" conaffinity="0"/></body>
+<body name="needle_G4" pos="2.438 1.603 0.05"><geom name="needle_geom_G4" type="box" size="0.03 0.22 0.01" rgba="1 0 0 1" quat="0.963163 0 0 0.268920" contype="0" conaffinity="0"/></body>
+<body name="hub_G4" pos="2.5 1.5 0.055"><geom name="hub_geom_G4" type="cylinder" size="0.06 0.015" rgba="0.2 0.2 0.2 1" contype="0" conaffinity="0"/></body>
+<body name="dial_G5" pos="10.5 5.5 0.02"><geom name="dial_geom_G5" type="cylinder" size="0.35 0.02" rgba="1 1 1 1" contype="0" conaffinity="0"/></body>
+<body name="tick_G5_-120" pos="10.249 5.355 0.045"><geom name="tick_geom_G5_-120" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.500000 0 0 0.866025" contype="0" conaffinity="0"/></body>
+<body name="tick_G5_-60" pos="10.249 5.645 0.045"><geom name="tick_geom_G5_-60" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.866025 0 0 0.500000" contype="0" conaffinity="0"/></body>
+<body name="tick_G5_0" pos="10.500 5.790 0.045"><geom name="tick_geom_G5_0" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="1.000000 0 0 -0.000000" contype="0" conaffinity="0"/></body>
+<body name="tick_G5_60" pos="10.751 5.645 0.045"><geom name="tick_geom_G5_60" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.866025 0 0 -0.500000" contype="0" conaffinity="0"/></body>
+<body name="tick_G5_120" pos="10.751 5.355 0.045"><geom name="tick_geom_G5_120" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.500000 0 0 -0.866025" contype="0" conaffinity="0"/></body>
+<body name="needle_G5" pos="10.566 5.600 0.05"><geom name="needle_geom_G5" type="box" size="0.03 0.22 0.01" rgba="1 0 0 1" quat="0.957319 0 0 -0.289032" contype="0" conaffinity="0"/></body>
+<body name="hub_G5" pos="10.5 5.5 0.055"><geom name="hub_geom_G5" type="cylinder" size="0.06 0.015" rgba="0.2 0.2 0.2 1" contype="0" conaffinity="0"/></body>
+<body name="dial_G6" pos="13.5 2.5 0.02"><geom name="dial_geom_G6" type="cylinder" size="0.35 0.02" rgba="1 1 1 1" contype="0" conaffinity="0"/></body>
+<body name="tick_G6_-120" pos="13.249 2.355 0.045"><geom name="tick_geom_G6_-120" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.500000 0 0 0.866025" contype="0" conaffinity="0"/></body>
+<body name="tick_G6_-60" pos="13.249 2.645 0.045"><geom name="tick_geom_G6_-60" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.866025 0 0 0.500000" contype="0" conaffinity="0"/></body>
+<body name="tick_G6_0" pos="13.500 2.790 0.045"><geom name="tick_geom_G6_0" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="1.000000 0 0 -0.000000" contype="0" conaffinity="0"/></body>
+<body name="tick_G6_60" pos="13.751 2.645 0.045"><geom name="tick_geom_G6_60" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.866025 0 0 -0.500000" contype="0" conaffinity="0"/></body>
+<body name="tick_G6_120" pos="13.751 2.355 0.045"><geom name="tick_geom_G6_120" type="box" size="0.02 0.06 0.01" rgba="0 0 0 1" quat="0.500000 0 0 -0.866025" contype="0" conaffinity="0"/></body>
+<body name="needle_G6" pos="13.461 2.613 0.05"><geom name="needle_geom_G6" type="box" size="0.03 0.22 0.01" rgba="1 0 0 1" quat="0.985996 0 0 0.166769" contype="0" conaffinity="0"/></body>
+<body name="hub_G6" pos="13.5 2.5 0.055"><geom name="hub_geom_G6" type="cylinder" size="0.06 0.015" rgba="0.2 0.2 0.2 1" contype="0" conaffinity="0"/></body>
+
+    <body name="b_south" pos="8 -0.5 0.5"><geom name="b_south_g" type="box" size="8.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/></body>
+    <body name="b_north" pos="8 10.5 0.5"><geom name="b_north_g" type="box" size="8.5 0.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/></body>
+    <body name="b_west" pos="-0.5 5 0.5"><geom name="b_west_g" type="box" size="0.5 5.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/></body>
+    <body name="b_east" pos="16.5 5 0.5"><geom name="b_east_g" type="box" size="0.5 5.5 0.5" material="box_material" rgba="0.0 0.72 0.53 1.0" contype="0" conaffinity="0"/></body>
+</worldbody>
+
+<keyframe>
+    <key name="home" qpos="
+    0 0 0.278
+    1 0 0 0
+    0.1 0.9 -1.8
+    -0.1 0.9 -1.8
+    0.1 0.9 -1.8
+    -0.1 0.9 -1.8"
+      ctrl="0.1 0.9 -1.8 -0.1 0.9 -1.8 0.1 0.9 -1.8 -0.1 0.9 -1.8"/>
+    <key name="home_higher" qpos="0 0 0.31 1 0 0 0 0 0.82 -1.63 0 0.82 -1.63 0 0.82 -1.63 0 0.82 -1.63"
+      ctrl="0 0.82 -1.63 0 0.82 -1.63 0 0.82 -1.63 0 0.82 -1.63"/>
+    <key name="pre_recovery"
+      qpos="-0.0318481 -0.000215369 0.0579031 1 -2.70738e-05 6.06169e-05 0.000231261 -0.352275 1.18554 -2.80738 0.360892 1.1806 -2.80281 -0.381197 1.16812 -2.79123 0.391054 1.1622 -2.78576"
+      ctrl="-0.352275 1.18554 -2.80738 0.360892 1.1806 -2.80281 -0.381197 1.16812 -2.79123 0.391054 1.1622 -2.78576"/>
+    <key name="footstand"
+      qpos="0 0 0.54 0.8 0 -0.8 0 0 0.82 -1.6 0 0.82 -1.68 0 1.82 -1.16 0.0 1.82 -1.16"
+      ctrl="0 0.82 -1.6 0 0.82 -1.68 0 1.82 -1.16 0.0 1.82 -1.16"/>
+    <key name="handstand"
+      qpos="0 0 0.54 0.8 0 0.8 0 0 -0.686 -1.16 0 -0.686 -1.16 0 1.7 -1.853 0 1.7 -1.853"
+      ctrl="0 -0.686 -1.16 0 -0.686 -1.16 0 1.7 -1.853 0 1.7 -1.853"/>
+  </keyframe>
+</mujoco>
